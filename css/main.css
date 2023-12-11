@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+:root {
+  --main-col: #8ce46c;
+  --alt-col: #65c8ff;
+  --text-col: #fff;
+  --dark-text: #000;
+  --text-soft: #819ec6;
+  --header-col: #273c99;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.logo {
+  flex: 1;
+  font-weight: bold;
+  text-transform: capitalize;
+  cursor: default;
+}
+
+.logo img {
+  width: 30px;
+  cursor: pointer;
+}
+
+.nav ul {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  font-size: 18px;
+  align-items: center;
+  text-transform: capitalize;
+  list-style: none;
+  margin-left: 65px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: var(--text-soft);
+}
+
+.sign {
+  flex: 1;
+  text-align: right;
+  cursor: pointer;
+  text-transform: capitalize;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 20px;
+  color: var(--header-col);
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    max-width: 1024px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    max-width: 768px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    max-width: 640px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    max-width: 475px;
+    padding: 0 20px;
+  }
+  .logo {
+    display: none;
+  }
+
+
+  .nav ul {
+    margin-left: 0;
+  }
+
+  .sign {
+    font-size: 16px;
+  }
+
+  ul li a {
+    font-size: 16px;
+  }
+}

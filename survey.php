@@ -1,10 +1,13 @@
 <?php
 require 'config.php';
 
+$is_user = false;
+$id = '';
 //check if user sign in or not
 if (isset($_SESSION["username"])) {
   $user = $_SESSION["username"];
   $id = $_SESSION["id"];
+  $is_user = true;
 } else {
   $user = 'sign in first';
 }
@@ -32,10 +35,9 @@ $no = 0;
 $sql_select_response = "SELECT response FROM `responses`";
 $all_response = mysqli_query($con, $sql_select_response);
 while ($row = mysqli_fetch_assoc($all_response)) {
-  if($row["response"] == 'yes' ){
+  if ($row["response"] == 'yes') {
     $yes++;
-  }
-  else{
+  } else {
     $no++;
   }
 }
@@ -97,12 +99,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="wrapper">
     <div class="nav">
       <div class="logo">
-        <img src="assets/logo.png" alt="background" />
+        <img src="assets/hero.png" alt="logo" />
       </div>
       <ul>
         <li><a href="index.php">Home</a></li>
         <?php
-        if (!isset($_SESSION["id"])) {
+        if (!$is_user) {
           echo "<li><a href='signin.php'>Survey</a></li>";
         } else {
           echo "<li><a href='survey.php'>Survey</a></li>";
@@ -112,49 +114,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li><a href="about.php">About</a></li>
       </ul>
       <?php
-      if (!isset($_SESSION["id"])) {
+      if (!$is_user) {
         echo "<a href='signin.php' class='sign'>sign in</a>";
       } else {
         echo "<a href='logout.php' class='sign'>logout</a>";
       }
       ?>
     </div>
-    <div class="info">
-      <p>welcome <span>
-          <?php echo $user ?>
-        </span> start your</p>
-      <h1>survey about Bullying</h1>
-    </div>
-    <form class="questions" method="post">
-      <?php
-      if ($data) {
-        while ($row = mysqli_fetch_assoc($data)) {
-          ?>
-          <div class="question">
-            <label class='text'>
-              <?php echo $row['question'] ?>
-              <?php echo $row['id'] ?>
-            </label>
-            <label class="yes" for="yes_<?php echo $row['id'] ?>">
-              <input id="yes_<?php echo $row['id'] ?>" type="radio" name="question_<?php echo $row['id'] ?>" value="yes"
-                required> Yes</label>
-            <label class="no" for="no_<?php echo $row['id'] ?>">
-              <input id="no_<?php echo $row['id'] ?>" type="radio" name="question_<?php echo $row['id'] ?>" value="no"
-                required> No</label>
-          </div>
-          <?php
+    <?php
+
+    if ($is_user) {
+      ?>
+      <div class="info">
+        <p>welcome <span>
+            <?php echo $user ?>
+          </span> start your</p>
+        <h1>survey about Bullying</h1>
+      </div>
+      <form class="questions" method="post">
+        <?php
+        if ($data) {
+          while ($row = mysqli_fetch_assoc($data)) {
+            ?>
+            <div class="question">
+              <label class='text'>
+                <?php echo $row['question'] ?>
+              </label>
+              <label class="yes" for="yes_<?php echo $row['id'] ?>">
+                <input id="yes_<?php echo $row['id'] ?>" type="radio" name="question_<?php echo $row['id'] ?>" value="yes"
+                  required> Yes</label>
+              <label class="no" for="no_<?php echo $row['id'] ?>">
+                <input id="no_<?php echo $row['id'] ?>" type="radio" name="question_<?php echo $row['id'] ?>" value="no"
+                  required> No</label>
+            </div>
+            <?php
+          }
         }
-      }
-      ?>
+        ?>
+        <?php
+        if ($alreadySubmitted) {
+          echo "<h2 class='status'>$status</h2>";
+          echo "<h3 class='result'>'$submission_users' people participated in this survey with a total of $questions questions, and the results were: $yes-->Yes | $no-->No</h3>";
+        } else {
+          echo '<input class="btn" type="submit" value="Submit">';
+        }
+        ?>
+      </form>
       <?php
-      if (strlen($status) > 5) {
-        echo "<h2 class='status'>$status</h2>";
-        echo "<h3 class='result'>'$submission_users' people participated in this survey with a total of $questions questions, and the results were: $yes-->Yes | $no-->No</h3>";
-      } else {
-        echo '<input class="btn" type="submit" value="Submit">';
-      }
-      ?>
-    </form>
+    } else {
+      echo '<h1 class="no-user">You have to <a href="signin.php">Sign in</a> first to start the survey</h1>';
+    }
+    ?>
   </div>
   </div>
 </body>

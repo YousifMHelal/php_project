@@ -1,6 +1,11 @@
 <?php
 require 'config.php';
 
+$is_user = false;
+
+if (isset($_SESSION["id"])) {
+  $is_user = true;
+}
 ?>
 
 
@@ -20,12 +25,12 @@ require 'config.php';
   <div class="wrapper">
     <div class="nav">
       <div class="logo">
-        <img src="assets/logo.png" alt="background" />
+        <img src="assets/hero.png" alt="logo" />
       </div>
       <ul>
         <li><a href="index.php">Home</a></li>
         <?php
-        if (!isset($_SESSION["id"])) {
+        if (!$is_user) {
           echo "<li><a href='signin.php'>Survey</a></li>";
         } else {
           echo "<li><a href='survey.php'>Survey</a></li>";
@@ -34,26 +39,24 @@ require 'config.php';
         <li><a href="info.php">info</a></li>
         <li><a href="about.php">About</a></li>
       </ul>
-
       <?php
-      if (!isset($_SESSION["id"])) {
+      if (!$is_user) {
         echo "<a href='signin.php' class='sign'>sign in</a>";
       } else {
         echo "<a href='logout.php' class='sign'>logout</a>";
       }
       ?>
-
     </div>
     <div class="container">
       <div class="info">
         <h1>online survey</h1>
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores
-          corrupti tempore accusamus perferendis debitis reiciendis architecto,
-          id dolore beatae quae fuga, facilis ipsam.
+          Bullying is a widespread issue that involves aggressive behavior aimed at harming others. It has detrimental
+          effects on the health and safety of individuals, causing negative psychological and social consequences. Join
+          the survey to contribute to finding effective solutions to this problem.
         </p>
         <?php
-        if (!isset($_SESSION["id"])) {
+        if (!$is_user) {
           echo "<a href='signin.php'>Start your survey</a>";
         } else {
           echo "<a href='survey.php'>Start your survey</a>";

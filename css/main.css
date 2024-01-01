@@ -35,8 +35,6 @@ body {
 
 .logo {
   flex: 1;
-  font-weight: bold;
-  text-transform: capitalize;
   cursor: default;
 }
 

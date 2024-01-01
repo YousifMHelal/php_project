@@ -22,6 +22,7 @@
 .info p {
   font-size: 16px;
   color: var(--text-soft);
+  text-align: justify;
 }
 
 .info a {

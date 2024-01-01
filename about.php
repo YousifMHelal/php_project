@@ -51,9 +51,9 @@ if (isset($_SESSION["id"])) {
       <h2 class='title'>this project have been done by : </h2>
       <table>
         <colgroup>
+          <col span="1" style="width: 10%;">
+          <col span="1" style="width: 75  %;">
           <col span="1" style="width: 15%;">
-          <col span="1" style="width: 65%;">
-          <col span="1" style="width: 20%;">
         </colgroup>
         <thead>
           <tr>

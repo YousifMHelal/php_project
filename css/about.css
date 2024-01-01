@@ -53,7 +53,7 @@ table tr td{
 
 @media screen and (max-width: 460px) {
   table {
-    width: 380px;
+    width: 340px;
   }
   table tbody td {
   font-size: 12px;

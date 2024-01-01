@@ -99,6 +99,10 @@
     font-size: 2.5rem;
   }
 
+  .questions{
+    margin: 20px 0;
+  }
+
   .questions .question .text {
     font-size: 1rem;
   }
